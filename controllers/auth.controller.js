@@ -30,7 +30,17 @@ class AuthController {
       res.status(401).send({ message: 'Incorrect password' });
     }
   }
-  static logout(req, res) {}
+  static logout(req, res) {
+    if (req.session.userId) {
+      req.session.destroy((err) => {
+        if (err) throw err;
+        res.clearCookie('connect.sid');
+        res.send({ message: 'Logout successful' });
+      });
+    } else {
+      res.status(400).send({ message: 'You are not logged in' });
+    }
+  }
 }
 
 module.exports = AuthController;

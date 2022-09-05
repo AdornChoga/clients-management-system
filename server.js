@@ -25,7 +25,7 @@ app.use(
 
 app.use(
   session({
-    secret: uuidV4(),
+    secret: 'secret',
     resave: false,
     saveUninitialized: true,
     store,
